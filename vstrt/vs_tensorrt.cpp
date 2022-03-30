@@ -434,7 +434,7 @@ static void VS_CC vsTrtCreate(
     vsapi->createFilter(
         in, out, "Model",
         vsTrtInit, vsTrtGetFrame, vsTrtFree,
-        fmParallel, 0, d.release(), core
+        fmParallelRequests, 0, d.release(), core
     );
 }
 

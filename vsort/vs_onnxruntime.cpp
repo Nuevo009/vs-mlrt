@@ -1053,7 +1053,7 @@ static void VS_CC vsOrtCreate(
     vsapi->createFilter(
         in, out, "Model",
         vsOrtInit, vsOrtGetFrame, vsOrtFree,
-        fmParallel, 0, d.release(), core
+        fmParallelRequests, 0, d.release(), core
     );
 }
 
