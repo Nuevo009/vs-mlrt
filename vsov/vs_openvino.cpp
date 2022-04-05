@@ -587,7 +587,10 @@ static void VS_CC vsOvCreate(
         }
 #endif // ENABLE_VISUALIZATION
 
-        d->executable_network = d->core.LoadNetwork(network, device);
+        d->executable_network = d->core.LoadNetwork(
+            network, device, 
+            {{ InferenceEngine::PluginConfigParams::KEY_CPU_BIND_THREAD, InferenceEngine::PluginConfigParams::NO }}
+        );
 
         if (auto err = checkNodesAndNetwork(d->executable_network, in_vis); err.has_value()) {
             return set_error(err.value());
