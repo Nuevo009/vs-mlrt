@@ -372,7 +372,8 @@ static const VSFrameRef *VS_CC vsOvGetFrame(
                 }
 
                 try {
-                    infer_request.Infer();
+                    infer_request.StartAsync();
+                    infer_request.Wait();
                 } catch (const InferenceEngine::Exception & e) {
                     return set_error(e.what());
                 }
@@ -588,8 +589,10 @@ static void VS_CC vsOvCreate(
 #endif // ENABLE_VISUALIZATION
 
         d->executable_network = d->core.LoadNetwork(
-            network, device, 
-            {{ InferenceEngine::PluginConfigParams::KEY_CPU_BIND_THREAD, InferenceEngine::PluginConfigParams::NO }}
+            network, device, {
+                { InferenceEngine::PluginConfigParams::KEY_CPU_BIND_THREAD, InferenceEngine::PluginConfigParams::NO },
+                { InferenceEngine::PluginConfigParams::KEY_PERFORMANCE_HINT, InferenceEngine::PluginConfigParams::THROUGHPUT }
+            }
         );
 
         if (auto err = checkNodesAndNetwork(d->executable_network, in_vis); err.has_value()) {
