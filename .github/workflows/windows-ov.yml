@@ -131,6 +131,7 @@ jobs:
 
     - name: Run vspipe
       shell: bash
+      timeout-minutes: 1
       run: |
         set -ex
         vs_portable/vspipe -i test.vpy -
@@ -147,6 +148,7 @@ jobs:
 
     - name: Run vspipe (fp16)
       shell: bash
+      timeout-minutes: 1
       run: |
         set -ex
         vs_portable/vspipe -i test.vpy -
