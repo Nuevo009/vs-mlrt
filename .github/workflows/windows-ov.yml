@@ -67,9 +67,9 @@ jobs:
         unzip -q openvino.zip
 
     - name: Configure
-      run: cmake -S . -B build -G Ninja -D CMAKE_BUILD_TYPE=Release
-        -D CMAKE_INTERPROCEDURAL_OPTIMIZATION=ON
-        -D CMAKE_MSVC_RUNTIME_LIBRARY=MultiThreaded
+      run: cmake -S . -B build -G Ninja -D CMAKE_BUILD_TYPE=Debug
+        -D CMAKE_INTERPROCEDURAL_OPTIMIZATION=OFF
+        -D CMAKE_MSVC_RUNTIME_LIBRARY=MultiThreadedDebug
         -D InferenceEngine_DIR=openvino/runtime/cmake
         -D OpenVINO_DIR=openvino/runtime/cmake
         -D VAPOURSYNTH_INCLUDE_DIRECTORY="%cd%\vapoursynth\include"
@@ -85,6 +85,7 @@ jobs:
         mkdir artifact\vsov
         copy openvino\runtime\3rdparty\tbb\bin\tbb.dll artifact\vsov\
         copy install\bin\vsov.dll artifact\
+        copy install\*\*.pdb artifact\
 
     - name: Upload
       uses: actions/upload-artifact@v2
