@@ -92,7 +92,7 @@ jobs:
         mkdir artifact\vsov
         copy openvino\runtime\3rdparty\tbb\bin\tbb.dll artifact\vsov\
         copy install\bin\vsov.dll artifact\
-        copy install\*\*.pdb artifact\
+        move install artifact
 
     - name: Upload
       uses: actions/upload-artifact@v2
