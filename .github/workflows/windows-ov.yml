@@ -90,9 +90,8 @@ jobs:
         cmake --install build --prefix install
         mkdir artifact
         mkdir artifact\vsov
-        copy openvino\runtime\3rdparty\tbb\bin\tbb.dll artifact\vsov\
+        copy openvino\runtime\3rdparty\tbb\bin\tbb_debug.dll artifact\
         copy install\bin\vsov.dll artifact\
-        move install artifact
 
     - name: Upload
       uses: actions/upload-artifact@v2
@@ -114,7 +113,7 @@ jobs:
       run: |
         copy artifact\*.dll vs_portable\vapoursynth64\plugins
         mkdir vs_portable\vapoursynth64\plugins\vsov\
-        copy artifact\vsov\*.dll vs_portable\vapoursynth64\plugins\vsov\
+        rem copy artifact\vsov\*.dll vs_portable\vapoursynth64\plugins\vsov\
 
     - name: Install waifu2x model
       run: |
